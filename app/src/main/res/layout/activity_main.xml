@@ -8,9 +8,9 @@
         android:id="@+id/homeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:text="@string/home_title"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -23,10 +23,10 @@
         android:text="@string/help"
         android:layout_below="@+id/homeTitle"
         android:layout_marginTop="70dp"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginStart="20dp"/>
 
     <ListView
-        android:id="@+id/todolist"
+        android:id="@+id/todoList"
         android:layout_below="@+id/homeTitle"
         android:layout_marginTop="60dp"
         android:layout_marginLeft="10dp"
@@ -35,14 +35,14 @@
         android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/add_button"
+        android:id="@+id/addBtn"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/radius"
-        android:text="+"
+        android:text="@string/plus"
         android:textSize="20sp"/>
 
 
