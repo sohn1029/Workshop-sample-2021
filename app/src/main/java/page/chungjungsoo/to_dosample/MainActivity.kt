@@ -2,11 +2,13 @@ package page.chungjungsoo.to_dosample
 
 import android.content.Context
 import android.content.DialogInterface
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.View
 import android.view.WindowInsetsController
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -27,8 +29,16 @@ class MainActivity : AppCompatActivity() {
 
         // Set app status bar color : white, force light status bar mode
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)
-        window.insetsController!!.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+
+        // Set light status bar mode depending on the android version
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController!!.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+        }
+        else {
+            @Suppress("DEPRECATION")
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
 
         // Add database helper and load data from database
         dbHandler = TodoDatabaseHelper(this)
