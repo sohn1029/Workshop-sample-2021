@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">To-do Sample</string>
+    <string name="home_title">Todo List</string>
+    <string name="help">Start by pressing the add button on the top right side.</string>
+
+</resources>
