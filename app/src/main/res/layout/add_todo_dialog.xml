@@ -8,15 +8,15 @@
         android:id="@+id/addTodoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Todo"
+        android:text="@string/add_todo"
         android:textSize="25sp"
         android:layout_margin="15dp"
-        android:layout_gravity="left" />
+        android:layout_gravity="start" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/title"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp" />
 
@@ -32,7 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="@string/description"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp" />
 
@@ -48,7 +48,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Due Date"
+        android:text="@string/due_date"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"/>
 
@@ -64,7 +64,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finished"
+        android:text="@string/finished"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"/>
 

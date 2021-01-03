@@ -2,5 +2,13 @@
     <string name="app_name">To-do Sample</string>
     <string name="home_title">Todo List</string>
     <string name="help">Start by pressing the add button on the top right side.</string>
+    <string name="plus">+</string>
+    <string name="add_todo">Add Todo</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="due_date">Due Date</string>
+    <string name="finished">Finished</string>
+    <string name="edit">Edit</string>
+    <string name="x">x</string>
 
 </resources>
