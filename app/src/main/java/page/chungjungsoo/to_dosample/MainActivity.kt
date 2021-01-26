@@ -1,5 +1,7 @@
 package page.chungjungsoo.to_dosample
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
@@ -11,14 +13,20 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsetsController
 import android.view.inputmethod.InputMethodManager
+import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.add_todo_dialog.*
 import page.chungjungsoo.to_dosample.todo.Todo
 import page.chungjungsoo.to_dosample.todo.TodoDatabaseHelper
 import page.chungjungsoo.to_dosample.todo.TodoListViewAdapter
+import java.text.SimpleDateFormat
+import java.util.*
+import javax.xml.datatype.DatatypeConstants.MONTHS
 
 class MainActivity : AppCompatActivity() {
     var dbHandler : TodoDatabaseHelper? = null
@@ -43,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         // Add database helper and load data from database
         dbHandler = TodoDatabaseHelper(this)
         var todolist: MutableList<Todo> = dbHandler!!.getAll()
-
         // Put data with custom listview adapter
         todoList.adapter = TodoListViewAdapter(this, R.layout.todo_item, todolist)
         todoList.emptyView = helpText
@@ -57,7 +64,49 @@ class MainActivity : AppCompatActivity() {
             // Get elements from custom dialog layout (add_todo_dialog.xml)
             val titleToAdd = dialogView.findViewById<EditText>(R.id.todoTitle)
             val desciptionToAdd = dialogView.findViewById<EditText>(R.id.todoDescription)
+            val dateToAdd = dialogView.findViewById<EditText>(R.id.todoDate)
+            val timeToAdd = dialogView.findViewById<EditText>(R.id.todoTime)
+            val finishToAdd = dialogView.findViewById<CheckBox>(R.id.finishCheck)
 
+            dateToAdd.isFocusable = false
+            timeToAdd.isFocusable = false
+            dateToAdd.hint = "Date"
+            timeToAdd.hint = "Time"
+            var cal = Calendar.getInstance()
+            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                val myFormat = "yyyy.MM.dd" // mention the format you need
+                val sdf = SimpleDateFormat(myFormat, Locale.KOREA)
+                dateToAdd.setText(sdf.format(cal.time))
+
+            }
+
+            dateToAdd.setOnClickListener {
+                DatePickerDialog(this, dateSetListener,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)).show()
+            }
+
+
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+
+                timeToAdd.setText(SimpleDateFormat("HH:mm").format(cal.time))
+            }
+
+            timeToAdd.setOnClickListener{
+                TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            }
+
+
+
+
+            //----------------------------------------------------
             // Add InputMethodManager for auto keyboard popup
             val ime = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -78,7 +127,9 @@ class MainActivity : AppCompatActivity() {
                         val todo = Todo(
                             titleToAdd.text.toString(),
                             desciptionToAdd.text.toString(),
-                            false
+                            dateToAdd.text.toString(),
+                            timeToAdd.text.toString(),
+                            finishToAdd.isChecked
                         )
                         dbHandler!!.addTodo(todo)
 
